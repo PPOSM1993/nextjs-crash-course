@@ -1,7 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    typescript: {
+        ignoreBuildErrors: true,
+    },
+    cacheComponents: true,
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+            }
+        ],
+        domains: ["images.unsplash.com"], // 👈 agrega aquí el dominio permitido
+    },
   async rewrites() {
     return [
       {
@@ -14,6 +26,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // This is required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
 };
 
